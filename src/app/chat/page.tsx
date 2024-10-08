@@ -6,6 +6,8 @@ import Image from "next/image";
 import Navbar from "../components/navbar";
 import { LightIcon, DarkIcon } from "@/app/components/ui/icons";
 import Link from "next/link";
+import ChatList from "@/app/components/ChatList";
+import Chatbox from "../components/Chatbox";
 
 const Chat = () => {
   const router = useRouter();
@@ -27,7 +29,7 @@ const Chat = () => {
           href="/chat"
           className={`${
             pathname === "/chat" ? "bg-customYellow text-black dark:text-black" : ""
-          } border p-2 px-4 font-semibold rounded hover:scale-105 dark:text-background`}
+          } border p-2 px-4 font-semibold rounded hover:scale-105`}
         >
           Messages
         </Link>
@@ -76,18 +78,12 @@ const Chat = () => {
             </div>
           </div>{" "}
           <div className="no-scrollbar max-h-full space-y-2.5 overflow-auto">
-            <div className="flex cursor-pointer items-center rounded px-4 py-2 hover:bg-gray-2 dark:hover:bg-strokedark">
-              <div className="relative mr-3.5 h-11 w-full max-w-11 rounded-full">
-                <Image src="/profile.png" width={44} height={44} alt="profile" />
-                <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full border border-gray-200 bg-green-600"></span>
-              </div>
-              <div className="w-full">
-                <h5 className="text-base font-medium text-black dark:text-white">Henry Dholi</h5>
-              </div>
-            </div>
+            <ChatList />
           </div>
         </div>
-        <div className="lg:w-3/4 border h-screen/75 border-gray-200 dark:border-gray-800 overflow-y-auto "></div>
+        <div className="lg:w-3/4 border h-screen/75 border-gray-200 dark:border-gray-800">
+          <Chatbox />
+        </div>
       </div>
     </div>
   );

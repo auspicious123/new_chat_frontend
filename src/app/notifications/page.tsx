@@ -26,7 +26,7 @@ const Notifications = () => {
           href="/chat"
           className={`${
             pathname === "/chat" ? "bg-customYellow text-black dark:text-black" : ""
-          } border p-2 px-4 font-semibold rounded hover:scale-105 text-foreground dark:text-background`}
+          } border p-2 px-4 font-semibold rounded hover:scale-105`}
         >
           Messages
         </Link>
@@ -81,7 +81,7 @@ const Notifications = () => {
                 <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full border border-gray-200 bg-green-600"></span>
               </div>
               <div className="w-full">
-                <h5 className="text-base font-medium text-black dark:text-white">Henry Dholi</h5>
+                <h5 className="text-base font-medium text-black dark:text-white">Name</h5>
               </div>
             </div>
           </div>

@@ -12,13 +12,13 @@
   /* --dark-box-background: #1e1e1e; */
 }
 
-/* Default body styles for light theme */
+
 body {
   background-color: var(--background-light);
   color: var(--foreground-light);
 }
 
-/* Dark theme styles */
+
 body.dark {
   background-color: var(--background-dark);
   color: var(--foreground-dark);

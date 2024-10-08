@@ -1,6 +1,10 @@
-"use client"; // This is a client-side component
+"use client";
 
 import { useEffect, useState } from "react";
+import { useSocket } from "../lib/hooks/useSocket";
+import { useDispatch } from "react-redux";
+import { newChatRequestReceived, receiveMessage } from "../redux/slices/chatSlice";
+import { NEXT_PUBLIC_BASE_URL } from "@/lib/config";
 
 export default function ClientLayout({
   children,
@@ -8,16 +12,34 @@ export default function ClientLayout({
   children: React.ReactNode;
 }>) {
   const [theme, setTheme] = useState<string | null>(null);
+  const socket = useSocket(NEXT_PUBLIC_BASE_URL);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // Retrieve the stored theme or determine the initial theme
+    if (socket) {
+      socket.on("new-chat-request", (data) => {
+        dispatch(newChatRequestReceived(data));
+      });
+
+      socket.on("receive-message", (message) => {
+        dispatch(receiveMessage(message));
+      });
+    }
+
+    return () => {
+      if (socket) {
+        socket.off("new-chat-request");
+        socket.off("receive-message");
+      }
+    };
+  }, [socket, dispatch]);
+  useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
 
     setTheme(initialTheme);
 
-    // Set the body class based on the theme
     document.body.classList.toggle("dark", initialTheme === "dark");
   }, []);
 
@@ -25,15 +47,9 @@ export default function ClientLayout({
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
 
-    // Update the body class and local storage
     document.body.classList.toggle("dark", newTheme === "dark");
     localStorage.setItem("theme", newTheme);
   };
 
-  return (
-    <>
-      {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

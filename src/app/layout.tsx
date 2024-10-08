@@ -1,11 +1,13 @@
-"use client"; 
+"use client";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ClientLayout from "./ClientLayout"; // Import the client-side layout
-import Navbar from "@/app/components/navbar"; // Assuming you have a Navbar component
+import ClientLayout from "./ClientLayout";
+import Navbar from "@/app/components/navbar"; 
 import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import store from "../redux/store"; 
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -49,19 +51,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar toggleTheme={toggleTheme} theme={theme}/> {/* Pass toggleTheme to Navbar */}
-        <ClientLayout>{children}</ClientLayout>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        <Provider store={store}>
+          <Navbar toggleTheme={toggleTheme} theme={theme} />
+          <ClientLayout>{children}</ClientLayout>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </Provider>
       </body>
     </html>
   );
