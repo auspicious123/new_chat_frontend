@@ -1,23 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { toast } from "react-toastify";
-import Image from "next/image";
-import Navbar from "../components/navbar";
-import { LightIcon, DarkIcon } from "@/app/components/ui/icons";
 import Link from "next/link";
 import ChatList from "@/app/components/ChatList";
 import Chatbox from "../components/Chatbox";
 
 const Chat = () => {
   const router = useRouter();
-  let pathname = usePathname();
-  const [theme, setTheme] = useState<string | null>(null);
+  const pathname = usePathname();
+//   const [theme, setTheme] = useState<string | null>(null);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setTheme(storedTheme || (prefersDark ? "dark" : "light"));
+    // const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // setTheme(storedTheme || (prefersDark ? "dark" : "light"));
 
     document.documentElement.classList.toggle("dark", storedTheme === "dark");
   }, []);

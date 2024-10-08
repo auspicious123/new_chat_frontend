@@ -11,7 +11,7 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState<string | null>(null);
+//   const [theme, setTheme] = useState<string | null>(null);
   const socket = useSocket(NEXT_PUBLIC_BASE_URL);
   const dispatch = useDispatch();
 
@@ -38,18 +38,9 @@ export default function ClientLayout({
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const initialTheme = storedTheme || (prefersDark ? "dark" : "light");
 
-    setTheme(initialTheme);
+    // setTheme(initialTheme);
 
     document.body.classList.toggle("dark", initialTheme === "dark");
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-
-    document.body.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
-  };
-
   return <>{children}</>;
 }

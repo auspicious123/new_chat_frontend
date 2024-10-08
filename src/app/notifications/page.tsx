@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const Notifications = () => {
   const router = useRouter();
-  let pathname = usePathname();
+  const pathname = usePathname();
   const [theme, setTheme] = useState<string | null>(null);
 
   useEffect(() => {

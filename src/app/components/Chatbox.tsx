@@ -46,7 +46,7 @@ const Chatbox = () => {
           {" "}
           <div className="">
             <div className="text-right py-2 text-white px-3 bg-purple-600 w-fit rounded-xl rounded-br-none break-words">
-              Yes please tell me what's your issue
+              Yes please tell me what is your issue
             </div>{" "}
             <div className="flex justify-end items-center text-xs">
               <span>1:55 pm</span>
